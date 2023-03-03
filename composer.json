@@ -1,0 +1,21 @@
+{
+    "name": "cjr123/yqbao",
+    "description": "使用e签宝进行电子签名、数字认证。",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "yyk cjr",
+            "email": "cuimail0808@163.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=7.3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Yyk\\Eqbao\\":"src/"
+        }
+    }
+}

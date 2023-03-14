@@ -11,11 +11,15 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "php": ">=7.3.0"
+        "php": ">=7.3.0",
+        "guzzlehttp/guzzle": "7.5.x-dev"
     },
     "autoload": {
         "psr-4": {
             "Yyk\\Eqbao\\":"src/"
-        }
+        },
+        "files": [
+            "src/Const/CardType.php"
+        ]
     }
 }

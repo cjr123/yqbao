@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../../demo/IdentityV2.1DemoPHP_signature/IdentityV2.1DemoPHP.iml" filepath="$PROJECT_DIR$/../../demo/IdentityV2.1DemoPHP_signature/IdentityV2.1DemoPHP.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../demo/xy-php-demo_signature/xy-php-demo.iml" filepath="$PROJECT_DIR$/../../demo/xy-php-demo_signature/xy-php-demo.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/yqbao.iml" filepath="$PROJECT_DIR$/.idea/yqbao.iml" />
     </modules>
   </component>

@@ -12,3 +12,5 @@ use Yyk\Eqbao\Test;
 
 $i = new Test();
 $i->show();
+
+var_dump(CRED_PSN_CH_IDCARD);

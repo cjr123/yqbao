@@ -7,10 +7,13 @@ spl_autoload_register(function ($class_name) {
 });
 
 
-use Yyk\Eqbao\Test;
+//use Yyk\Eqbao\Test;
+//
+//
+//$i = new Test();
+//$i->show();
+//
+//var_dump(CRED_PSN_CH_IDCARD);
 
-
-$i = new Test();
-$i->show();
-
-var_dump(CRED_PSN_CH_IDCARD);
+$filePath='/work/file/发票.pdf';
+var_dump(basename($filePath));

@@ -29,5 +29,18 @@ class HeaderManage
         return $headers;
     }
 
+    /**
+     * 上传文件需要的header信息
+     * @param $contentMD5
+     * @param $contentType
+     * @return array
+     */
+    public static function headersForUploadFile($contentMD5, $contentType)
+    {
+        $headers['Content-MD5'] = $contentMD5;
+        $headers['Content-Type'] = $contentType;
+        return $headers;
+    }
+
 
 }

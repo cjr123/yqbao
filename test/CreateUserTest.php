@@ -11,10 +11,10 @@ spl_autoload_register(function ($class_name) {
 $appid = '7438953390';
 $secret = '00d8dcaa04dcd876aa9e76168ea5b70d';
 $host = 'https://smlopenapi.esign.cn';
-$thirdPartyUserId = '123213ss2aab';
-$name = '崔景瑞';
-$idNumber = '131182198411111618';
-$mobile = '18630663550';
+$thirdPartyUserId = '123213s221sd';
+$name = '张首宾';
+$idNumber = '370923199307122810';
+$mobile = '13693064196';
 
 $createUser = new UserManage($thirdPartyUserId, $name, $idNumber, $mobile);
 $result = $createUser->create($host, $appid, $secret);

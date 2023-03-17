@@ -13,7 +13,7 @@ class Upload
     {
         $client = new Client();
         $jsonParam = json_encode($params, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-//        var_dump($jsonParam);
+        var_dump($jsonParam);
         //对body体做md5摘要
         $contentMd5 = UtilHelper::getContentMd5($jsonParam);
         $reqSignature = UtilHelper::getSignature($method, "*/*", "application/json; charset=UTF-8", $contentMd5, "", "", $url, $secret);

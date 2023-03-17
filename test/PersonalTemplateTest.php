@@ -15,7 +15,7 @@ $host = 'https://smlopenapi.esign.cn';
 $accountid = 'a517e5813b614ba082617075451197f8';
 
 $person = new PersonaltemplateCreate($accountid);
-$person->setType('RECTANGLE');
-$result = $person->setHeight(30)->setWidth(50)->setColor(RED)->create($host, $appid, $secret);
+$person->setType('BORDERLESS');
+$result = $person->setHeight(60)->setWidth(70)->setColor(BLACK)->create($host, $appid, $secret);
 var_dump("------------ 开始创建个人印章 ---------------", $result, "------------ 结束创建个人印章 ---------------");
 

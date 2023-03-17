@@ -13,12 +13,12 @@ $appid = '7438953390';
 $secret = '00d8dcaa04dcd876aa9e76168ea5b70d';
 $host = 'https://smlopenapi.esign.cn';
 $fileName = '/work/data/环信充值发票.pdf';
-$fileId = '519f5ee932f34af295f1f66837a25e34';
+$fileId = '02e4b0ac30b74007bec46fd32c19bea0';
 
 $upload = new FileManage($host, $appid, $secret);
 //上传文件
-//$fileId = $upload->uploadFile($fileName);
-//PrintService::info(sprintf("FileId：%s", $fileId));
+$fileId = $upload->uploadFile($fileName);
+PrintService::info(sprintf("FileId：%s", $fileId));
 
 //获取文件上传状态
 //$beUploaded = $upload->status($fileId);
@@ -26,7 +26,7 @@ $upload = new FileManage($host, $appid, $secret);
 
 
 //获取文件详情
-$result = $upload->detail($fileId);
-var_dump($result);
+//$result = $upload->detail($fileId);
+//var_dump($result);
 
 

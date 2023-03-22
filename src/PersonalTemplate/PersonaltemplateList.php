@@ -3,6 +3,7 @@
 namespace Yyk\Eqbao\PersonalTemplate;
 
 use GuzzleHttp\Client;
+use Yyk\Eqbao\Common\PrintService;
 use Yyk\Eqbao\Common\Upload;
 use Yyk\Eqbao\Common\UtilHelper;
 use Yyk\Eqbao\HeaderManage;
@@ -14,17 +15,21 @@ class PersonaltemplateList
         'size' => 20
     ];
     private $searchUrl = '/v1/accounts/{accountId}/seals';
-    private $method = 'GET';
+    private $setDefaultUrl = '/v1/accounts/{accountId}/seals/{sealId}/setDefault';
     /**
      * @var Client
      */
     private $client;
 
+    private $host;
+    private $appid;
+    private $secret;
 
-    public function __construct($accountId)
+    public function __construct($host, $appid, $secret)
     {
-        $this->searchUrl = str_replace('{accountId}', $accountId, $this->searchUrl);
-        $this->params['accountId'] = $accountId;
+        $this->host = $host;
+        $this->appid = $appid;
+        $this->secret = $secret;
         $this->client = new Client();
     }
 
@@ -40,32 +45,68 @@ class PersonaltemplateList
         return $this;
     }
 
-    public function search($host, $appid, $secret)
+    /**
+     * 查看印章列表
+     * @param $accountId
+     * @return void
+     */
+    public function search($accountId)
     {
+        $data = [];
+        $method = 'GET';
+        $this->searchUrl = str_replace('{accountId}', $accountId, $this->searchUrl);
+        $this->params['accountId'] = $accountId;
+        $resultObj = Upload::uploadData($this->host, $this->appid, $this->secret, $this->params, $method, $this->searchUrl);
+        if (is_null($resultObj)) {
+            PrintService::err(__METHOD__, "获取印章列表出错，accountid：" . $accountId);
+            return $data;
+        }
 
-        $resultObj = Upload::uploadData($host, $appid, $secret, $this->params, $this->method, $this->searchUrl);
-        var_dump($resultObj);
+        foreach ($resultObj->data->seals as $item) {
+            $data[] = [
+                'sealId' => $item->sealId,
+                'fileKey' => $item->fileKey,
+                'defaultFlag' => $item->defaultFlag,
+                'url' => $item->url,
+                'status' => $item->status,
+                'createDate' => $item->createDate,
+                'width' => $item->width,
+                'height' => $item->height
+            ];
 
-//        $jsonParam = json_encode($this->params, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-////        var_dump($jsonParam);
-//        //对body体做md5摘要
-//        $contentMd5 = UtilHelper::getContentMd5($jsonParam);
-//        $reqSignature = UtilHelper::getSignature($this->method, "*/*", "application/json; charset=UTF-8", $contentMd5, "", "", $this->searchUrl, $secret);
-//        try {
-//            $response = $this->client
-//                ->request($this->method, $host . $this->searchUrl, ['headers' => HeaderManage::headers($appid, $reqSignature, $contentMd5), 'body' => $jsonParam])
-//                ->getBody()
-//                ->getContents();
-//            $resultObj = json_decode($response);
-//            if ($resultObj->code) {
-//                echo sprintf("获取个人模板印章列表出错：%s\n", $resultObj->message);
-//                return null;
-//            }
-//            var_dump($resultObj);
-//        } catch (\Exception $e) {
-//            echo sprintf("获取个人模板印章列表异常：%s\n", $e->getMessage());
-//            return null;
-//        }
+        }
+        return $data;
+    }
+
+
+    /**
+     * 设置默认印章
+     * @param $accountId
+     * @param $sealId
+     * @return void
+     */
+    public function setDefault($accountId, $sealId)
+    {
+        $method = 'PUT';
+        $this->setDefaultUrl = str_replace('{accountId}', $accountId, $this->setDefaultUrl);
+        $this->setDefaultUrl = str_replace('{sealId}', $sealId, $this->setDefaultUrl);
+        $params = [
+            'accountId' => $accountId,
+            'sealId' => $sealId
+        ];
+        $resultObj = Upload::uploadData($this->host, $this->appid, $this->secret, $params, $method, $this->setDefaultUrl);
+        if(is_null($resultObj))
+        {
+            PrintService::err(__METHOD__,sprintf("设置默认印章异常,accountId:%s,sealId:%s",$accountId,$sealId));
+            return false;
+        }
+        if(!$resultObj->code)
+        {
+            PrintService::err(__METHOD__,sprintf("设置默认印章出错,accountId:%s,sealId:%s",$accountId,$sealId));
+            return false;
+        }
+        return true;
+
     }
 
 

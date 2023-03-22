@@ -10,7 +10,7 @@ $appid = '7438953390';
 $secret = '00d8dcaa04dcd876aa9e76168ea5b70d';
 $host = 'https://smlopenapi.esign.cn';
 //$fileName = '/work/data/环信充值发票.pdf';
-$fileId = '0c81b44eddf844a6b9b458a93bf777c9';
+$fileId = 'a5f9152384564a1c8a4edbed47902f56';
 
 //崔
 $accountId = 'a517e5813b614ba082617075451197f8';
@@ -24,13 +24,13 @@ $s_posY = 163;
 
 
 $createObj = new \Yyk\Eqbao\CreateFlowOneStep($host, $appid, $secret);
-$createObj->setSealType(1)
-    ->addSigners($accountId, $cposX, $cposY, $sealId)
-    ->addSigners($s_accountId, $s_posX, $s_posY)
-    ->sign($fileId, "环信发票10");
+//$createObj->setSealType(1)
+//    ->addSigners($accountId, $cposX, $cposY, $sealId)
+//    ->addSigners($s_accountId, $s_posX, $s_posY)
+//    ->sign($fileId, "环信发票11");
 
-$flowId = '9098cf24d44f4b8e8ca41858590cc135';
+$flowId = 'b7d6278c42a74a53b2dc347cfadd0fe2';
 ////获取签名地址
-//$createObj->getSignUrl($accountId, $flowId);
+$createObj->getSignUrl($accountId, $flowId);
 
 

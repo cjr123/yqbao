@@ -20,11 +20,15 @@ class PersonaltemplateCreate
     ];
     private $method = 'POST';
     private $client;
+    private $host;
+    private $appid;
+    private $secret;
 
-    public function __construct($accountId)
+    public function __construct($host, $appid, $secret)
     {
-        $this->params['accountId'] = $accountId;
-        $this->createUrl = str_replace("{accountId}", $accountId, $this->createUrl);
+        $this->host = $host;
+        $this->appid = $appid;
+        $this->secret = $secret;
         $this->client = new Client();
     }
 
@@ -85,21 +89,21 @@ class PersonaltemplateCreate
 
     /**
      * 创建个人模板印章
-     * @param $host
-     * @param $appid
-     * @param $secret
+     * @param $accountId
      * @return array|null
      */
-    public function create($host, $appid, $secret)
+    public function create($accountId)
     {
+        $this->params['accountId'] = $accountId;
+        $this->createUrl = str_replace("{accountId}", $accountId, $this->createUrl);
         $jsonParam = json_encode($this->params, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 //        var_dump($jsonParam);
         //对body体做md5摘要
         $contentMd5 = UtilHelper::getContentMd5($jsonParam);
-        $reqSignature = UtilHelper::getSignature($this->method, "*/*", "application/json; charset=UTF-8", $contentMd5, "", "", $this->createUrl, $secret);
+        $reqSignature = UtilHelper::getSignature($this->method, "*/*", "application/json; charset=UTF-8", $contentMd5, "", "", $this->createUrl, $this->secret);
         try {
             $response = $this->client
-                ->request($this->method, $host . $this->createUrl, ['headers' => HeaderManage::headers($appid, $reqSignature, $contentMd5), 'body' => $jsonParam])
+                ->request($this->method, $this->host . $this->createUrl, ['headers' => HeaderManage::headers($this->appid, $reqSignature, $contentMd5), 'body' => $jsonParam])
                 ->getBody()
                 ->getContents();
             $resultObj = json_decode($response);

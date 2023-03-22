@@ -8,13 +8,13 @@ spl_autoload_register(function ($class_name) {
     require_once $class_name . '.php';
 });
 
-$appid = '7438953390';
-$secret = '00d8dcaa04dcd876aa9e76168ea5b70d';
+$appid = 'appid';
+$secret = 'secret';
 $host = 'https://smlopenapi.esign.cn';
-$thirdPartyUserId = '123213s221sd';
-$name = '张首宾';
-$idNumber = '370923199307122810';
-$mobile = '13693064196';
+$thirdPartyUserId = '用户唯一标识';
+$name = '姓名';
+$idNumber = '签证号';
+$mobile = '手机号';
 
 $createUser = new UserManage($thirdPartyUserId, $name, $idNumber, $mobile);
 $result = $createUser->create($host, $appid, $secret);

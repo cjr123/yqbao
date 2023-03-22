@@ -6,8 +6,8 @@ spl_autoload_register(function ($class_name) {
     require_once $class_name . '.php';
 });
 
-$appid = '7438953390';
-$secret = '00d8dcaa04dcd876aa9e76168ea5b70d';
+$appid = 'appid';
+$secret = 'secret';
 $host = 'https://smlopenapi.esign.cn';
 //$fileName = '/work/data/环信充值发票.pdf';
 $fileId = 'a5f9152384564a1c8a4edbed47902f56';
@@ -29,7 +29,7 @@ $createObj = new \Yyk\Eqbao\CreateFlowOneStep($host, $appid, $secret);
 //    ->addSigners($s_accountId, $s_posX, $s_posY)
 //    ->sign($fileId, "环信发票11");
 
-$flowId = 'b7d6278c42a74a53b2dc347cfadd0fe2';
+$flowId = 'flowId';
 ////获取签名地址
 $createObj->getSignUrl($accountId, $flowId);
 

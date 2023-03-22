@@ -9,11 +9,11 @@ spl_autoload_register(function ($class_name) {
     require_once $class_name . '.php';
 });
 
-$appid = '7438953390';
-$secret = '00d8dcaa04dcd876aa9e76168ea5b70d';
+$appid = 'appid';
+$secret = 'secret';
 $host = 'https://smlopenapi.esign.cn';
-$fileName = '/work/data/环信充值发票.pdf';
-$fileId = '02e4b0ac30b74007bec46fd32c19bea0';
+$fileName = 'pdf文件路径';
+$fileId = 'fileId';
 
 $upload = new FileManage($host, $appid, $secret);
 //上传文件

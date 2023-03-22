@@ -9,10 +9,10 @@ spl_autoload_register(function ($class_name) {
     require_once $class_name . '.php';
 });
 
-$appid = '7438953390';
-$secret = '00d8dcaa04dcd876aa9e76168ea5b70d';
+$appid = 'appid';
+$secret = 'secret';
 $host = 'https://smlopenapi.esign.cn';
-$accountid = 'a517e5813b614ba082617075451197f8';
+$accountid = 'accountid';
 
 $person = new PersonaltemplateCreate($host, $appid, $secret);
 $person->setType('BORDERLESS');

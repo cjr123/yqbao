@@ -8,11 +8,11 @@ spl_autoload_register(function ($class_name) {
     require_once $class_name . '.php';
 });
 
-$appid = '7438953390';
-$secret = '00d8dcaa04dcd876aa9e76168ea5b70d';
+$appid = 'APPID';
+$secret = 'SECRET';
 $host = 'https://smlopenapi.esign.cn';
-$accountid = 'a517e5813b614ba082617075451197f8';
-$redirectUrl = 'https://www.baidu.com';
+$accountid = 'accountId';
+$redirectUrl = '跳转地址';
 
 $person = new PersonalCertification($accountid);
 $result = $person->setRedirectUrl($redirectUrl)->setShowResultPage(false)->build($host, $appid, $secret);

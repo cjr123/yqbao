@@ -13,7 +13,7 @@ $secret = 'secret';
 $host = 'https://smlopenapi.esign.cn';
 $thirdPartyUserId = '用户唯一标识';
 $name = '姓名';
-$idNumber = '签证号';
+$idNumber = '身份证号';
 $mobile = '手机号';
 
 $createUser = new UserManage($thirdPartyUserId, $name, $idNumber, $mobile);

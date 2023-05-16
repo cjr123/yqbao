@@ -10,15 +10,15 @@ $appid = 'appid';
 $secret = 'secret';
 $host = 'https://smlopenapi.esign.cn';
 //$fileName = '/work/data/环信充值发票.pdf';
-$fileId = 'a5f9152384564a1c8a4edbed47902f56';
+$fileId = '';
 
 //崔
-$accountId = 'a517e5813b614ba082617075451197f8';
+$accountId = '';
 $cposX = 436;
 $cposY = 60;
-$sealId = '755dbe41-3527-419f-b867-be5bd4bf5ccc';
+$sealId = '';
 //首
-$s_accountId = '4f3a549c97524af4bd445af1f1b4fce5';
+$s_accountId = '';
 $s_posX = 101;
 $s_posY = 163;
 

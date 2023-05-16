@@ -8,10 +8,10 @@ spl_autoload_register(function ($class_name) {
     require_once $class_name . '.php';
 });
 
-$appid = 'appid';
-$secret = 'secret';
+$appid = '7438953390';
+$secret = '00d8dcaa04dcd876aa9e76168ea5b70d';
 $host = 'https://smlopenapi.esign.cn';
-$accountid = 'accountId';
+$accountid = 'b925a46ee1944f5587fc6cec38d0f737';
 
 $person = new PersonaltemplateList($host, $appid, $secret);
 $result = $person->search($accountid);

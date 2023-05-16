@@ -13,7 +13,7 @@ class Upload
     {
         $client = new Client();
         $jsonParam = json_encode($params, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-        var_dump($jsonParam);
+//        var_dump($jsonParam);
         //对body体做md5摘要
         $contentMd5 = UtilHelper::getContentMd5($jsonParam);
         $reqSignature = UtilHelper::getSignature($method, "*/*", "application/json; charset=UTF-8", $contentMd5, "", "", $url, $secret);
@@ -24,13 +24,11 @@ class Upload
             $resultObj = json_decode($response);
             if ($resultObj->code) {
                 PrintService::err(__METHOD__, sprintf("上传信息出错：%s", $resultObj->message));
-//                echo sprintf("上传信息出错：%s\n", $resultObj->message);
                 return null;
             }
             return $resultObj;
         } catch (\Exception $e) {
             PrintService::err(__METHOD__, sprintf("上传信息出异常：%s", $e->getMessage()));
-//            echo sprintf("上传信息出错异常：%s\n", $e->getMessage());
             return null;
         }
     }

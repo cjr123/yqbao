@@ -9,10 +9,10 @@
             "email": "cuimail0808@163.com"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "require": {
         "php": ">=7.3.0",
-        "guzzlehttp/guzzle": "7.5.x-dev"
+        "guzzlehttp/guzzle": "^7.6"
     },
     "autoload": {
         "psr-4": {

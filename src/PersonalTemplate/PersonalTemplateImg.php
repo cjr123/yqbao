@@ -5,23 +5,14 @@ namespace Yyk\Eqbao\PersonalTemplate;
 use Yyk\Eqbao\Common\PrintService;
 use Yyk\Eqbao\Common\Upload;
 
-class PersonalTemplateImg
+class PersonalTemplateImg extends PersonalTemplate
 {
-    private $appid;
-    private $secret;
-    private $host;
     private $url = '/v1/accounts/{accountId}/seals/image';
     private $type = 'BASE64';
     private $width = 95;
     private $height = 95;
     private $transparentFlag = false;
 
-    public function __construct(string $host, string $appid, string $secret)
-    {
-        $this->host = $host;
-        $this->appid = $appid;
-        $this->secret = $secret;
-    }
 
     public function setWidth(int $width)
     {

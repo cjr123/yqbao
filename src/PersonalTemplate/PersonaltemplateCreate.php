@@ -2,16 +2,14 @@
 
 namespace Yyk\Eqbao\PersonalTemplate;
 
-use GuzzleHttp\Client;
-use Yyk\Eqbao\Common\UtilHelper;
-use Yyk\Eqbao\HeaderManage;
+use Yyk\Eqbao\Common\Upload;
 
 //use Yyk\Eqbao\BORDERLESS;
 
 /**
  * 个人模板印章管理
  */
-class PersonaltemplateCreate
+class PersonaltemplateCreate extends PersonalTemplate
 {
     private $createUrl = '/v1/accounts/{accountId}/seals/personaltemplate';
     private $params = [
@@ -19,18 +17,7 @@ class PersonaltemplateCreate
         'type' => 'BORDERLESS'
     ];
     private $method = 'POST';
-    private $client;
-    private $host;
-    private $appid;
-    private $secret;
 
-    public function __construct($host, $appid, $secret)
-    {
-        $this->host = $host;
-        $this->appid = $appid;
-        $this->secret = $secret;
-        $this->client = new Client();
-    }
 
     /**
      * 设置印章颜色
@@ -89,39 +76,25 @@ class PersonaltemplateCreate
 
     /**
      * 创建个人模板印章
-     * @param $accountId
+     * @param string $accountId
      * @return array|null
      */
-    public function create($accountId)
+    public function create(string $accountId): ?array
     {
         $this->params['accountId'] = $accountId;
         $this->createUrl = str_replace("{accountId}", $accountId, $this->createUrl);
-        $jsonParam = json_encode($this->params, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-//        var_dump($jsonParam);
-        //对body体做md5摘要
-        $contentMd5 = UtilHelper::getContentMd5($jsonParam);
-        $reqSignature = UtilHelper::getSignature($this->method, "*/*", "application/json; charset=UTF-8", $contentMd5, "", "", $this->createUrl, $this->secret);
-        try {
-            $response = $this->client
-                ->request($this->method, $this->host . $this->createUrl, ['headers' => HeaderManage::headers($this->appid, $reqSignature, $contentMd5), 'body' => $jsonParam])
-                ->getBody()
-                ->getContents();
-            $resultObj = json_decode($response);
-            if ($resultObj->code) {
-                echo sprintf("个人模板印章创建出错：%s\n", $resultObj->message);
-                return null;
-            }
-            return [
-                'sealId' => $resultObj->data->sealId,
-                'fileKey' => $resultObj->data->fileKey,
-                'url' => $resultObj->data->url,
-                'width' => $resultObj->data->width,
-                'height' => $resultObj->data->height,
-            ];
-        } catch (\Exception $e) {
-            echo sprintf("个人模板印章创建异常：%s\n", $e->getMessage());
+        $resultObj = Upload::uploadData($this->host, $this->appid, $this->secret, $this->params, $this->method, $this->createUrl);
+        if (is_null($resultObj)) {
+            echo sprintf("个人模板印章创建出错：%s\n", $resultObj->message);
             return null;
         }
+        return [
+            'sealId' => $resultObj->data->sealId,
+            'fileKey' => $resultObj->data->fileKey,
+            'url' => $resultObj->data->url,
+            'width' => $resultObj->data->width,
+            'height' => $resultObj->data->height,
+        ];
     }
 
 

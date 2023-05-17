@@ -8,30 +8,13 @@ use Yyk\Eqbao\Common\Upload;
 use Yyk\Eqbao\Common\UtilHelper;
 use Yyk\Eqbao\HeaderManage;
 
-class PersonaltemplateList
+class PersonaltemplateList extends PersonalTemplate
 {
     private $params = [
         'offset' => 1,
         'size' => 20
     ];
     private $searchUrl = '/v1/accounts/{accountId}/seals';
-    private $setDefaultUrl = '/v1/accounts/{accountId}/seals/{sealId}/setDefault';
-    /**
-     * @var Client
-     */
-    private $client;
-
-    private $host;
-    private $appid;
-    private $secret;
-
-    public function __construct($host, $appid, $secret)
-    {
-        $this->host = $host;
-        $this->appid = $appid;
-        $this->secret = $secret;
-        $this->client = new Client();
-    }
 
     public function setPage(int $page)
     {
@@ -76,37 +59,6 @@ class PersonaltemplateList
 
         }
         return $data;
-    }
-
-
-    /**
-     * 设置默认印章
-     * @param $accountId
-     * @param $sealId
-     * @return void
-     */
-    public function setDefault($accountId, $sealId)
-    {
-        $method = 'PUT';
-        $this->setDefaultUrl = str_replace('{accountId}', $accountId, $this->setDefaultUrl);
-        $this->setDefaultUrl = str_replace('{sealId}', $sealId, $this->setDefaultUrl);
-        $params = [
-            'accountId' => $accountId,
-            'sealId' => $sealId
-        ];
-        $resultObj = Upload::uploadData($this->host, $this->appid, $this->secret, $params, $method, $this->setDefaultUrl);
-        if(is_null($resultObj))
-        {
-            PrintService::err(__METHOD__,sprintf("设置默认印章异常,accountId:%s,sealId:%s",$accountId,$sealId));
-            return false;
-        }
-        if(!$resultObj->code)
-        {
-            PrintService::err(__METHOD__,sprintf("设置默认印章出错,accountId:%s,sealId:%s",$accountId,$sealId));
-            return false;
-        }
-        return true;
-
     }
 
 

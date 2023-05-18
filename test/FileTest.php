@@ -2,6 +2,7 @@
 
 use Yyk\Eqbao\FileManage;
 use Yyk\Eqbao\Common\PrintService;
+use Yyk\Eqbao\Conf;
 
 require '../vendor/autoload.php';
 spl_autoload_register(function ($class_name) {
@@ -9,13 +10,11 @@ spl_autoload_register(function ($class_name) {
     require_once $class_name . '.php';
 });
 
-$appid = 'appid';
-$secret = 'secret';
-$host = 'https://smlopenapi.esign.cn';
-$fileName = 'pdf文件路径';
-$fileId = 'fileId';
 
-$upload = new FileManage($host, $appid, $secret);
+$fileName = 'pdf文件路径';
+//$fileId = 'fileId';
+
+$upload = new FileManage(Conf::$host, Conf::$appid, Conf::$secret);
 //上传文件
 $fileId = $upload->uploadFile($fileName);
 PrintService::info(sprintf("FileId：%s", $fileId));

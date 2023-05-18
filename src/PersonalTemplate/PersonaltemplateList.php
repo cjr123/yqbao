@@ -2,11 +2,8 @@
 
 namespace Yyk\Eqbao\PersonalTemplate;
 
-use GuzzleHttp\Client;
 use Yyk\Eqbao\Common\PrintService;
 use Yyk\Eqbao\Common\Upload;
-use Yyk\Eqbao\Common\UtilHelper;
-use Yyk\Eqbao\HeaderManage;
 
 class PersonaltemplateList extends PersonalTemplate
 {

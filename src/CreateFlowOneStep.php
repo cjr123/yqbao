@@ -77,15 +77,17 @@ class CreateFlowOneStep
      * @param string $signerAccountId
      * @param int $posX
      * @param int $posY
+     * @param int $posPage
      * @param string $sealId
      * @return $this
      */
-    public function addSigners(string $signerAccountId, int $posX, int $posY, string $sealId = '')
+    public function addSigners(string $signerAccountId, int $posX, int $posY,int $posPage=1, string $sealId = '')
     {
         $this->signers[] = [
             'signerAccountId' => $signerAccountId,
             'posX' => $posX,
             'posY' => $posY,
+            'posPage'=>$posPage,
             'sealId' => $sealId
         ];
         return $this;
@@ -114,7 +116,7 @@ class CreateFlowOneStep
                         'fileId' => $this->fileId,
                         'sealType' => $this->sealType,
                         'posBean' => [
-                            'posPage' => '1',
+                            'posPage' => $signer['posPage'],
                             'posX' => $signer['posX'],
                             'posY' => $signer['posY']
                         ],

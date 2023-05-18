@@ -1,20 +1,16 @@
 <?php
+require '../vendor/autoload.php';
 
 use Yyk\Eqbao\PersonalTemplate\PersonaltemplateList;
+use Yyk\Eqbao\Conf;
 
-require '../vendor/autoload.php';
 spl_autoload_register(function ($class_name) {
     echo $class_name . "\n";
     require_once $class_name . '.php';
 });
 
-$appid = '';
-$secret = '';
-$host = 'https://smlopenapi.esign.cn';
-$accountid = '';
-
-$person = new PersonaltemplateList($host, $appid, $secret);
-$result = $person->search($accountid);
+$person = new PersonaltemplateList(Conf::$host, Conf::$appid, Conf::$secret);
+$result = $person->search(Conf::$c_accountId);
 var_dump($result);
 
 

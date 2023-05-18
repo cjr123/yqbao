@@ -4,8 +4,6 @@ namespace Yyk\Eqbao\PersonalTemplate;
 
 use Yyk\Eqbao\Common\Upload;
 
-//use Yyk\Eqbao\BORDERLESS;
-
 /**
  * 个人模板印章管理
  */

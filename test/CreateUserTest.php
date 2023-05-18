@@ -1,6 +1,7 @@
 <?php
 
 use Yyk\Eqbao\UserManage;
+use Yyk\Eqbao\Conf;
 
 require '../vendor/autoload.php';
 spl_autoload_register(function ($class_name) {
@@ -8,15 +9,8 @@ spl_autoload_register(function ($class_name) {
     require_once $class_name . '.php';
 });
 
-$appid = '';
-$secret = '';
-$host = 'https://smlopenapi.esign.cn';
-$thirdPartyUserId = '1112312';
-$name = '';
-$idNumber = '';
-$mobile = '';
-
-$createUser = new UserManage($thirdPartyUserId, $name, $idNumber, $mobile);
-$result = $createUser->create($host, $appid, $secret);
+$thirdPartyUserId = 'aa12123';
+$createUser = new UserManage($thirdPartyUserId, Conf::$s_name, Conf::$s_idNumber, Conf::$s_mobile);
+$result = $createUser->create(Conf::$host, Conf::$appid, Conf::$secret);
 var_dump("开始创建用户",$result,"用户创建完成");
 

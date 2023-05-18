@@ -5,6 +5,9 @@ namespace Yyk\Eqbao;
 use Yyk\Eqbao\Common\PrintService;
 use Yyk\Eqbao\Common\Upload;
 
+/**
+ * 静默授权控制
+ */
 class AutoSignManage
 {
     private $autoSignUrl = '/v1/signAuth/{accountId}';
@@ -29,14 +32,14 @@ class AutoSignManage
      */
     public function setAutoSign(string $accountId, string $deadline = ''): bool
     {
-        $this->autoSignUrl = str_replace("{accountId}", $accountId, $this->autoSignUrl);
+        $postUrl = str_replace("{accountId}", $accountId, $this->autoSignUrl);
         $params = [
             'accountId' => $accountId
         ];
         if (!empty($deadline)) {
             $params['deadline'] = $deadline;
         }
-        $resultObj = Upload::uploadData($this->host, $this->appid, $this->secret, $params, 'POST', $this->autoSignUrl);
+        $resultObj = Upload::uploadData($this->host, $this->appid, $this->secret, $params, 'POST', $postUrl);
 //        var_dump($resultObj);
         if (is_null($resultObj)) {
             PrintService::err(__METHOD__, sprintf("设置静默签署出错，accountId：%s", $accountId));
